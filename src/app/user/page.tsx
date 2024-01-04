@@ -41,16 +41,28 @@ const deleteItem = (e: React.MouseEvent<HTMLElement> | undefined, selectedRowKe
 
 
 // Form submit function
-const handleFormFinish = async (values: any) => {
-  console.log('Form Values:', values);
+const handleNewUserSubmit = (values: any, setData: React.Dispatch<React.SetStateAction<DataType[]>>) => {
+  setData((prevData) => [
+    ...prevData,
+    {
+      key: (Math.max(...prevData.map(item => Number(item.key))) + 1).toString(),
+      ...values,
+      tags: values.tags.split(','),
+    },
+  ]);
+  message.success('New user added successfully');
 };
+
+const handleEditSubmit = (values: any) => {
+  console.log(values)
+}
 
 const MasterViewButtons: React.FC<{ hasSelected: boolean, selectedRow: Key[], setData: React.Dispatch<React.SetStateAction<DataType[]>> }> = ({ hasSelected, selectedRow, setData }) => {
 
   return (
     <ConfigProvider>
     <Space size="middle">
-      <MyFormComponent onFinish={handleFormFinish} formName="New"></MyFormComponent>
+      <MyFormComponent onFinish={(values) => handleNewUserSubmit(values, setData)} formName="New"></MyFormComponent>
       
       <Button type="primary" disabled={hasSelected}>
         Edit
@@ -114,7 +126,7 @@ const columns: ColumnsType<DataType> = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <MyFormComponent onFinish={handleFormFinish} formName='Edit' showPlusIcon={false} initialValue={record}></MyFormComponent>
+        <MyFormComponent onFinish={handleEditSubmit} formName='Edit' showPlusIcon={false} initialValue={record}></MyFormComponent>
         <Button onClick={() => handleDelete(record.key)}>Delete</Button>
       </Space>
     ),
