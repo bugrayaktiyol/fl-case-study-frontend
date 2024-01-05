@@ -6,7 +6,7 @@ import ProForm, {
   ModalForm,
   ProFormText,
 } from '@ant-design/pro-form';
-import { DataType } from '@/app/user/page';
+import { DataType } from '@/models/userModel';
 
 
 const waitTime = (time: number) => new Promise((res) => setTimeout(res, time));
