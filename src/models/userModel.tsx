@@ -11,5 +11,5 @@ export interface DataType {
   Name: string;
   Age: number;
   Address: string;
-  Tags: string[];
+  Tags: string[]; // Since SQLITE does not support array type I stored it as an array manually for table display
 }
