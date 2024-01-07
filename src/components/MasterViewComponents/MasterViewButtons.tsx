@@ -7,7 +7,7 @@ import {
   fetchDataFromApi,
   deleteUserById,
   addNewUser,
-} from "@/services/DataService";
+} from "../../services/DataService";
 
 interface MasterViewButtonsProps {
   hasSelected: boolean;

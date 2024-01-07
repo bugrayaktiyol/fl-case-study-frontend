@@ -6,7 +6,7 @@ import {
   deleteUser as apiDeleteUser,
 } from "../api/users/index";
 import { ApiResponse, DataType } from "@/models/userModel";
-import { mapData } from "@/utils/utils";
+import { mapData } from "../utils/utils";
 
 // Fetch data from API
 export const fetchDataFromApi = async (): Promise<DataType[]> => {
