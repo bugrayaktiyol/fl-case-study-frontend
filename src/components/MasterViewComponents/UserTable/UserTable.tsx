@@ -51,7 +51,7 @@ const UserTable: React.FC = () => {
         dataSource={data}
         rowSelection={{ onChange: onSelectChange }}
         loading={loading}
-        locale={{ emptyText: "" }}
+        locale={{ emptyText: "Loading data..."}}
       />
     </>
   );
