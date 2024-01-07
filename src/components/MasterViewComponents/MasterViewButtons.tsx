@@ -20,7 +20,7 @@ const MasterViewButtons: React.FC<MasterViewButtonsProps> = ({
   selectedRow,
   setData,
 }) => {
-  const confirmDelete = async (
+  const handleDeleteConfirm = async (
     e: React.MouseEvent<HTMLElement> | undefined,
     selectedRow: Key[]
   ) => {
@@ -28,17 +28,15 @@ const MasterViewButtons: React.FC<MasterViewButtonsProps> = ({
 
     if (selectedRow && selectedRow.length > 0) {
       try {
-        for (const key of selectedRow) {
-          await deleteUserById(key.toString());
-        }
+        await Promise.all(selectedRow.map((key) => deleteUserById(key.toString()))); // Delete all selected users in parallel
       } catch (error) {
         message.error("Failed to delete users");
       }
     }
-    //setdata to update table
+
     const updatedData = await fetchDataFromApi();
     setData(updatedData);
-    // message success message for deleted users
+
     message.success(`${dataCount} users deleted successfully`);
   };
 
@@ -71,7 +69,7 @@ const MasterViewButtons: React.FC<MasterViewButtonsProps> = ({
         <Popconfirm
           title="Delete the user"
           description="Are you sure to delete this user?"
-          onConfirm={(e) => confirmDelete(e, selectedRow)}
+          onConfirm={(e) => handleDeleteConfirm(e, selectedRow)}
           onCancel={cancelDelete}
           okText="Yes"
           cancelText="No"
