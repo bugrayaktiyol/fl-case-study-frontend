@@ -1,31 +1,37 @@
-'use client';
-import React from 'react';
-import { Button, message } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+"use client";
+import React from "react";
+import { Button, message } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import ProForm, {
   ModalForm,
   ProFormText,
-} from '@ant-design/pro-form';
-import { DataType } from '@/app/user/page';
-
+  ProFormDigit,
+} from "@ant-design/pro-form";
+import { DataType } from "@/models/userModel";
 
 const waitTime = (time: number) => new Promise((res) => setTimeout(res, time));
 
-interface MyFormComponentProps {
+interface UserFormComponentProps {
   onFinish: (values: any) => void;
   formName: string;
   showPlusIcon?: boolean;
   initialValue?: DataType;
 }
 
-const MyFormComponent: React.FC<MyFormComponentProps> = ({onFinish, formName,showPlusIcon = true, initialValue = [] }) => {
+const UserFormComponent: React.FC<UserFormComponentProps> = ({
+  onFinish,
+  formName,
+  showPlusIcon = true,
+  initialValue = [],
+}) => {
   const [form] = ProForm.useForm();
   return (
     <ModalForm
       title="Add new user"
       trigger={
         <Button type="primary">
-          {showPlusIcon && <PlusOutlined />} {/* Conditionally rendering PlusOutlined icon for purpose*/}
+          {showPlusIcon && <PlusOutlined />}{" "}
+          {/* Conditionally rendering PlusOutlined icon for edit/create */}
           {formName}
         </Button>
       }
@@ -34,41 +40,48 @@ const MyFormComponent: React.FC<MyFormComponentProps> = ({onFinish, formName,sho
       initialValues={initialValue}
       modalProps={{
         destroyOnClose: true,
-        onCancel: () => console.log('run'),
       }}
-      submitTimeout={2000}
-      onFinish={async (values) => {
-        await waitTime(2000);
+      submitTimeout={1000}
+      onFinish={async (values: any) => {
+        await waitTime(1000); // Fake loading
         onFinish(values);
-        message.success('Submitted successfully');
         return true;
       }}
       submitter={{
         searchConfig: {
-          resetText: 'Cancel',
-          submitText: 'Submit',
+          resetText: "Cancel",
+          submitText: "Submit",
         },
       }}
     >
       <ProForm.Group>
         <ProFormText
+          disabled
           width="md"
-          name="name"
+          name="key"
+          label="ID"
+          placeholder="UUID"
+        />
+        <ProFormText
+          width="md"
+          name="Name"
           label="Name"
           placeholder="Enter name"
         />
 
-        <ProFormText
-          width="md"
-          name="age"
+        <ProFormDigit
           label="Age"
+          name="Age"
+          min={1}
+          max={120}
+          fieldProps={{ precision: 0 }}
           placeholder="Enter age"
         />
       </ProForm.Group>
       <ProForm.Group>
         <ProFormText
           width="md"
-          name="address"
+          name="Address"
           label="Address"
           placeholder="Enter Address"
         />
@@ -76,7 +89,7 @@ const MyFormComponent: React.FC<MyFormComponentProps> = ({onFinish, formName,sho
       <ProForm.Group>
         <ProFormText
           width="md"
-          name="tags"
+          name="Tags"
           label="Tags"
           placeholder="Enter tags"
         />
@@ -85,4 +98,4 @@ const MyFormComponent: React.FC<MyFormComponentProps> = ({onFinish, formName,sho
   );
 };
 
-export default MyFormComponent;
+export default UserFormComponent;
