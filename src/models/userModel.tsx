@@ -1,15 +1,15 @@
 export interface ApiResponse {
-  ID: string;
+  ID: number;
   Name: string;
   Age: number;
   Address: string;
-  Tags: string[];
+  Tags: string;
 }
 
 export interface DataType {
   key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  Name: string;
+  Age: number;
+  Address: string;
+  Tags: string[];
 }
