@@ -19,7 +19,6 @@ const UserTable: React.FC = () => {
         setLoading(true);
         const apiData = await fetchDataFromApi();
         setData(apiData);
-        console.log(apiData);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
