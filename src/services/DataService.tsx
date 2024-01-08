@@ -12,8 +12,20 @@ import { mapData } from "../utils/utils";
 export const fetchDataFromApi = async (): Promise<DataType[]> => {
   try {
     const data: ApiResponse[] = await getAllUsers();
+
+    if (!data) {
+      throw new Error("API response is empty");
+    }
+
+    // Log the received data for debugging
+    console.log("received data from API", data);
+
     // Map data using the common mapping function
     const mappedData: DataType[] = data.map(mapData);
+
+    // Log the mapped data for debugging
+    console.log("mapped data", mappedData);
+
     return mappedData;
   } catch (error) {
     console.error("Error fetching data from API:", error);

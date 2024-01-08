@@ -1,9 +1,9 @@
 export interface ApiResponse {
   ID: number;
-  Name: string;
-  Age: number;
-  Address: string;
-  Tags: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string;
 }
 
 export interface DataType {

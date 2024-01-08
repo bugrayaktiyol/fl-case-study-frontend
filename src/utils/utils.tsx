@@ -5,9 +5,9 @@ import { ApiResponse, DataType } from "@/models/userModel";
 export const mapData = (data: ApiResponse): DataType => {
   return {
     key: data.ID.toString(),
-    Name: data.Name,
-    Age: data.Age,
-    Address: data.Address,
-    Tags: data.Tags ? data.Tags.split(',') : [],
+    Name: data.name,      // Use lowercase "name" instead of "Name"
+    Age: data.age,        // Use lowercase "age" instead of "Age"
+    Address: data.address, // Use lowercase "address" instead of "Address"
+    Tags: data.tags ? data.tags.split(',') : [], // Use lowercase "tags" instead of "Tags"
   };
 };

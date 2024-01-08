@@ -50,7 +50,6 @@ const MasterViewButtons: React.FC<MasterViewButtonsProps> = ({
       // ID parametresini çıkart
       const { ID, ...userData } = values;
       await addNewUser(userData);
-      console.log(values);
       const updatedData = await fetchDataFromApi();
       setData(updatedData);
       message.success("New user added successfully");
