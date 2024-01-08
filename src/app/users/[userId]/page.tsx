@@ -1,5 +1,6 @@
 // Import necessary dependencies and components
 'use client';
+import React from 'react';
 import { fetchSingleUser } from '@/services/DataService';
 import { DataType } from '@/models/userModel';
 import { Card, Typography, Button } from 'antd';
